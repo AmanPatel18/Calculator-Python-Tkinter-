@@ -15,11 +15,9 @@ e1.place(x=10,y=20)
 def number_click(number):
     global expression
     expression=e1.get()
-    if number:
-        expression=expression+str(number)
+    expression=expression+str(number)
     e1.delete(0,END)
-    if number:
-        e1.insert(END,expression)
+    e1.insert(END,expression)
 
 def clear():
     global expression
@@ -49,16 +47,16 @@ e1.bind('<Return>',display_result)
 
 # defining buttons
 
-btn1=Button(win,text="1",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(1))
-btn2=Button(win,text="2",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(2))
-btn3=Button(win,text="3",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(3))
-btn4=Button(win,text="4",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(4))
-btn5=Button(win,text="5",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(5))
-btn6=Button(win,text="6",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(6))
-btn7=Button(win,text="7",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(7))
-btn8=Button(win,text="8",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(8))
-btn9=Button(win,text="9",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(9))
-btn0=Button(win,text="0",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(0))
+btn1=Button(win,text="1",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('1'))
+btn2=Button(win,text="2",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('2'))
+btn3=Button(win,text="3",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('3'))
+btn4=Button(win,text="4",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('4'))
+btn5=Button(win,text="5",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('5'))
+btn6=Button(win,text="6",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('6'))
+btn7=Button(win,text="7",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('7'))
+btn8=Button(win,text="8",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('8'))
+btn9=Button(win,text="9",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('9'))
+btn0=Button(win,text="0",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('0'))
 btn_dot=Button(win,text=".",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('.'))
 
 btn_add=Button(win,text="+",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('+'))
