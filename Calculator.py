@@ -3,63 +3,50 @@ win=Tk()
 win.title("Calculator")
 win.configure(bg="black")
 win.geometry("350x520")
+win.resizable(0,0)
 
 #define entry field
 
-e1=Entry(win,width=15,font="Ariel 28 bold",borderwidth=5,bg="grey")
+e1=Entry(win,width=15,font="Ariel 28 bold",borderwidth=5,bg="grey",takefocus=True)
 e1.place(x=10,y=20)
 
 # define button_click function
 
 def number_click(number):
-    current=e1.get()
+    global expression
+    expression=e1.get()
+    if number:
+        expression=expression+str(number)
     e1.delete(0,END)
-    e1.insert(0,str(current)+str(number))
+    if number:
+        e1.insert(END,expression)
 
 def clear():
-    e1.delete(0,END)
-
-def add():
-    first_number=e1.get()
-    global f_num,operation
-    f_num=int(first_number)
-    operation="addition"
-    e1.delete(0,END)
-
-def sub():
-    first_number=e1.get()
-    global f_num,operation
-    f_num=int(first_number)
-    operation="subtraction"
-    e1.delete(0,END)
-
-def mul():
-    first_number=e1.get()
-    global f_num,operation
-    f_num=int(first_number)
-    operation="multiplication"
-    e1.delete(0,END)
-
-def div():
-    first_number=e1.get()
-    global f_num,operation
-    f_num=int(first_number)
-    operation="division"
+    global expression
+    expression=""
     e1.delete(0,END)
 
 def equal():
-    result=0
-    second_number=e1.get()
-    e1.delete(0,END)
-    if operation=="addition":
-        result=f_num+int(second_number)
-    if operation=="multiplication":
-        result=f_num*int(second_number)
-    if operation=="subtraction":
-        result=f_num-int(second_number)
-    if operation=="division":
-        result=f_num/int(second_number)
-    e1.insert(0,str(round(result,12)))
+    try:
+        global expression
+        e1.delete(0,END)
+        result=str(eval(expression))
+        e1.insert(END,result)
+        expression=""
+    except:
+        pass
+
+def display_result(e):
+    try:
+        expression= e1.get()
+        e1.delete(0,END)
+        result=str(eval(expression))
+        e1.insert(END,result)
+    except:
+        pass
+
+e1.bind('<Return>',display_result)
+
 # defining buttons
 
 btn1=Button(win,text="1",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(1))
@@ -72,14 +59,15 @@ btn7=Button(win,text="7",width=5,font="Ariel 22 bold",bg="gray",command=lambda:n
 btn8=Button(win,text="8",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(8))
 btn9=Button(win,text="9",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(9))
 btn0=Button(win,text="0",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click(0))
+btn_dot=Button(win,text=".",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('.'))
 
-btn_add=Button(win,text="+",width=5,font="Ariel 22 bold",bg="gray",command=add)
-btn_sub=Button(win,text="-",width=5,font="Ariel 22 bold",bg="gray",command=sub)
-btn_mul=Button(win,text="x",width=5,font="Ariel 22 bold",bg="gray",command=mul)
-btn_div=Button(win,text="/",width=5,font="Ariel 22 bold",bg="gray",command=div)
+btn_add=Button(win,text="+",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('+'))
+btn_sub=Button(win,text="-",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('-'))
+btn_mul=Button(win,text="x",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('*'))
+btn_div=Button(win,text="/",width=5,font="Ariel 22 bold",bg="gray",command=lambda:number_click('/'))
 
 btn_equals=Button(win,text="=",width=11,font="Ariel 22 bold",bg="gray",command=equal)
-btn_clear=Button(win,text="Clear",width=11,font="Ariel 22 bold",bg="gray",command=clear)
+btn_clear=Button(win,text="Clear",width=5,font="Ariel 22 bold",bg="gray",command=clear)
 
 # putting  buttons on the screen
 
@@ -100,7 +88,8 @@ btn_sub.place(x=122,y=310)
 btn_div.place(x=234,y=310)
 
 btn_add.place(x=10,y=380)
-btn_clear.place(x=122,y=380)
+btn_dot.place(x=122, y=380)
+btn_clear.place(x=234,y=380)
 
 btn_mul.place(x=10,y=450)
 btn_equals.place(x=122,y=450)
