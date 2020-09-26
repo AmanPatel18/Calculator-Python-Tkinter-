@@ -5,6 +5,8 @@ win.configure(bg="black")
 win.geometry("350x520")
 win.resizable(0,0)
 
+global expression
+expression=0
 #define entry field
 
 e1=Entry(win,width=15,font="Ariel 28 bold",borderwidth=5,bg="grey",takefocus=True)
@@ -27,6 +29,7 @@ def clear():
 def equal():
     try:
         global expression
+        expression=e1.get()
         e1.delete(0,END)
         result=str(eval(expression))
         e1.insert(END,result)
